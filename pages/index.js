@@ -1,54 +1,42 @@
-import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import React, { useState, useEffect } from "react";
 
+import Head from "../components/modules/Head/Head.js"
+
+import ChartMain from "../components/modules/ChartMain/ChartMain.js"
+import ChartVerticalBar from "../components/modules/ChartVerticalBar/ChartVerticalBar.js"
+import ChartMini from "../components/modules/ChartMini/ChartMini.js"
+import ChartCandlestick from "../components/modules/ChartCandlestick/ChartCandlestick.js"
+
+import dataLine from "./api/data/line"
+import dataCandle from "./api/data/candle"
+
+// export default function Home({ dataLine, dataCandle}) { // disabled for dummy data
 export default function Home() {
+  
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Head />
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      {/* <main className={styles.main}> */}
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-md-9">
 
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+            <ChartMain data={dataLine} />
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+            <ChartCandlestick data={dataCandle} />
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+            <ChartMini data={dataLine} /> 
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+            <ChartVerticalBar data={[1, -2, 3, -4, 5, -6]} category={"A", "B", "C", "D", "E", "F"} />
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+            {/* <CompareChart /> */}
+
+          </div>
         </div>
-      </main>
+      </div>
+      {/* </main> */}
 
       <footer className={styles.footer}>
         <a
@@ -63,3 +51,21 @@ export default function Home() {
     </div>
   );
 }
+
+// Home.getInitialProps = async (ctx) => {
+//   let apiUrl = "http://taufan-api.invest.theedgesingapore.com"
+//   let res = await fetch(apiUrl + '/stockPrice/line?stock_code=0001')
+//   let json = await res.json()
+
+//   let res2 = await fetch(apiUrl + '/stockPrice/candleStick?stock_code=0001 ')
+//   let json2 = await res2.json()
+//   // return { dataSingleLine: json.data, dataVerticalBar: json2.data.data, categoryVerticalBar: json2.data.categories }
+//   let dataLine = json.data.map(item=>{
+//     return [new Date(item.stock_date).getTime(), parseFloat(item.stock_close)]
+//   })
+
+//   let dataCandle = json2.data.map(item=>{
+//     return [new Date(item.stock_date).getTime(), parseFloat(item.stock_open), parseFloat(item.stock_high), parseFloat(item.stock_low), parseFloat(item.stock_close)]
+//   })
+//   return {dataLine, dataCandle}
+// }
