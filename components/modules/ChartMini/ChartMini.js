@@ -23,10 +23,12 @@ const ChartMini = ({ data }) => {
             backgroundColor: 'transparent',
         },
         xAxis: {
+            gridLineWidth: 0,
             enabled: false,
             showEmpty: false,
         },
         yAxis: {
+            gridLineWidth: 0,
             min: 0,
             title: {
                 text: ''

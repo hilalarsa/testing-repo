@@ -2,11 +2,12 @@ const Checkbox = ({ handleClick, handleChange, title = "", titleClassName = "", 
     <label>
         <input
             onClick={e => {
-                if (handleClick !== undefined) handleClick(e.target.checked);
+                if (handleClick !== undefined) handleClick(e);
             }}
             onChange={e => {
-                if (handleChange !== undefined) handleChange(e.target.checked);
+                if (handleChange !== undefined) handleChange(e);
             }}
+            name={title}
             type="checkbox"
             checked={checked}
         />

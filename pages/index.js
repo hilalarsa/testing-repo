@@ -1,54 +1,46 @@
-import styles from "../styles/Home.module.css";
 import React, { useState, useEffect } from "react";
 
 import Head from "../components/modules/Head/Head.js"
 
+import Navbar from "../components/modules/Navbar/Navbar.js"
 import ChartMain from "../components/modules/ChartMain/ChartMain.js"
 import ChartVerticalBar from "../components/modules/ChartVerticalBar/ChartVerticalBar.js"
 import ChartMini from "../components/modules/ChartMini/ChartMini.js"
 import ChartCandlestick from "../components/modules/ChartCandlestick/ChartCandlestick.js"
+import ChartCompare from "../components/modules/ChartCompare/ChartCompare.js"
 
 import dataLine from "./api/data/line"
 import dataCandle from "./api/data/candle"
 
 // export default function Home({ dataLine, dataCandle}) { // disabled for dummy data
 export default function Home() {
-  
+
   return (
-    <div className={styles.container}>
+    <div>
       <Head />
-
-      {/* <main className={styles.main}> */}
-      <div className="container mt-5">
-        <div className="row">
-          <div className="col-md-9">
-
-            <ChartMain data={dataLine} />
-
-            <ChartCandlestick data={dataCandle} />
-
-            <ChartMini data={dataLine} /> 
-
-            <ChartVerticalBar data={[1, -2, 3, -4, 5, -6]} category={"A", "B", "C", "D", "E", "F"} />
-
-            {/* <CompareChart /> */}
-
-          </div>
+      <Navbar />
+      <div className="container mx-auto px-4 sm:px-6 md:px-10">
+        <div className="my-2">
+          <ChartMain data={dataLine} />
         </div>
-      </div>
-      {/* </main> */}
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+        <div className="my-2">
+          <ChartCandlestick data={dataCandle} />
+        </div>
+
+        <div className="my-2">
+          <ChartMini data={dataLine} />
+        </div>
+
+        <div className="my-2">
+          <ChartCompare data={dataLine} />
+        </div>
+
+        {/* <ChartVerticalBar data={[1, -2, 3, -4, 5, -6]} category={"A", "B", "C", "D", "E", "F"} /> temp removed */}
+
+      </div>
+
+    </div >
   );
 }
 

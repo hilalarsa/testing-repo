@@ -16,7 +16,7 @@ import HighchartIndicatorsAll from 'highcharts/indicators/indicators-all';
 import IndicatorEma from 'highcharts/indicators/ema';
 import IndicatorBollinger from 'highcharts/indicators/bollinger-bands';
 
-import Checkbox from "../../elements/Checkbox"
+import Checkbox from "../../elements/Checkbox/Checkbox"
 
 import styles from './ChartMain.module.css'
 
@@ -33,15 +33,15 @@ if (typeof Highcharts === "object") {
     IndicatorEma(Highcharts)
     IndicatorBollinger(Highcharts)
 }
-const ChartMain = ({ data, chartType = "" }) => {
-    
-    const chartMain = useRef() //create chart reference
+const ChartMain = ({ data }) => {
+
+    const chartRef = useRef() //create chart reference
     const [indicatorMA, setIndicatorMA] = useState(false);
     const [isGuiEnabled, setGuiEnabled] = useState(false);
     let options = {
         chart: {
-            type: chartType,
-            height: 400
+            type: "spline",
+            height: 400,
         },
         title: {
             text: 'AAPL Line Chart'
@@ -49,7 +49,11 @@ const ChartMain = ({ data, chartType = "" }) => {
         mapNavigation: {
             enableMouseWheelZoom: true
         },
+        xAxis: {
+            gridLineWidth: 0
+        },
         yAxis: {
+            gridLineWidth: 0,
             crosshair: {
                 label: {
                     enabled: true,
@@ -102,9 +106,11 @@ const ChartMain = ({ data, chartType = "" }) => {
                 padding: 3,
                 style: {
                     color: '#5C5C5C',
+                    fill: "#ACDB45"
                 },
                 states: {
                     select: {
+                        fill: "#EBF7F7",
                         color: '#15A9A9',
                         style: {
                             color: '#15A9A9',
@@ -162,7 +168,7 @@ const ChartMain = ({ data, chartType = "" }) => {
 
     useEffect(() => {
         if (indicatorMA) {
-            chartMain.current.chart.addSeries({
+            chartRef.current.chart.addSeries({
                 type: 'sma',
                 linkedTo: 'aapl',
                 color: 'red',
@@ -175,23 +181,22 @@ const ChartMain = ({ data, chartType = "" }) => {
 
     return (
         <div>
-            <h3>Main Chart</h3>
             <HighchartsReact
-                ref={chartMain}
+                ref={chartRef}
                 highcharts={Highcharts}
                 constructorType={'stockChart'}
                 options={options}
             />
-            <div className="flex justify-end">
+            <div className="flex justify-start space-x-2 md:justify-end">
                 <Checkbox
-                    title="Toggle MA Indicators"
-                    handleClick={(v) => setIndicatorMA(v)}
+                    title="MA Indicators"
+                    handleClick={(e) => setIndicatorMA(e.target.checked)}
                     checked={indicatorMA}
                     titleClassName={"ml-2"}
                 />
                 <Checkbox
-                    title="Toggle GUI"
-                    handleClick={(v) => setGuiEnabled(v)}
+                    title="GUI"
+                    handleClick={(e) => setGuiEnabled(e.target.checked)}
                     checked={isGuiEnabled}
                     titleClassName={"ml-2"}
                 />

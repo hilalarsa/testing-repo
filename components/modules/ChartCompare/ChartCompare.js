@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import Highcharts from "highcharts/highstock";
+
+import Highcharts, { chart } from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import HighchartMaps from "highcharts/modules/map";
 import HighchartStockTools from "highcharts/modules/stock-tools";
@@ -17,7 +18,8 @@ import IndicatorBollinger from 'highcharts/indicators/bollinger-bands';
 
 import Checkbox from "../../elements/Checkbox/Checkbox"
 
-import styles from '../ChartMain/ChartMain.module.css'
+import StockList from "../StockList/StockList"
+import dataLine2 from "../../../pages/api/data/line2"
 
 if (typeof Highcharts === "object") {
     HighchartMaps(Highcharts);
@@ -32,22 +34,42 @@ if (typeof Highcharts === "object") {
     IndicatorEma(Highcharts)
     IndicatorBollinger(Highcharts)
 }
-const ChartCandlestick = ({ data }) => {
 
-    const [isGuiEnabled, setGuiEnabled] = useState(false);
+const COMPARE_LIMIT_MIN = 2
+const COMPARE_LIMIT_MAX = 5
+const ChartCompare = ({ data }) => {
+
+    const chartRef = useRef() //create chart reference
+    const [seriesOptions, setSeriesOptions] = useState([
+        {
+            name: "aapl",
+            data: [Math.random() * 10, Math.random() * 10, Math.random() * 2, Math.random() * 10, Math.random() * 10],
+        },
+        {
+            name: "aapl2",
+            data: [Math.random() * 10, Math.random() * 5, Math.random() * 10, Math.random() * 2, Math.random() * 10],
+        }
+    ])
+    // let seriesOptions = []
+
+    // seriesOptions[1] = {
+    //     name: "AAPL",
+    //     data: aapl
+    // };
+
     const options = {
         chart: {
-            type: 'candlestick',
-            height: 400
+            type: 'spline',
+            height: 400,
         },
         title: {
-            text: 'AAPL Candle Stick'
+            text: 'Compare Line Chart'
         },
         mapNavigation: {
             enableMouseWheelZoom: true
         },
-        xAxis:{
-            gridLineWidth: 0,
+        xAxis: {
+            gridLineWidth: 0
         },
         yAxis: {
             gridLineWidth: 0,
@@ -57,28 +79,35 @@ const ChartCandlestick = ({ data }) => {
                     padding: 8
                 }
             },
-            dataLabels: {
-                enabled: true
-            }
         },
-        series: [
-            {
-                data: data,
-            }
-        ],
+        series: seriesOptions,
+        // series: [
+        //     {
+        //         marker: {
+        //             enabled: false,
+        //         },
+        //         name: "aapl",
+        //         data: dataLine2,
+        //         color: {
+        //             linearGradient: [1200, 0, 0, 0],
+        //             stops: [
+        //                 [0, "#00b072"],
+        //                 [1, "#fcc203"]
+        //             ]
+        //         },
+        //     },
+
+        // ],
         stockTools: {
             gui: {
                 buttons: ['indicators', 'simpleShapes', 'lines', 'crookedLines', 'measure', 'advanced', 'toggleAnnotations', 'verticalLabels', 'flags', 'fullScreen'],
-                enabled: isGuiEnabled,
-                toolbarClassName: styles.toolsContainer
+                enabled: false,
+                // toolbarClassName: styles.toolsContainer
             }
         },
         plotOptions: {
-            candlestick: {
-                color: "#C32A5D",
-                lineColor: "C32A5D",
-                upColor: "#14B162",
-                upLineColor: "#14B162"
+            series: {
+                compare: 'percent'
             }
         },
         scrollbar: {
@@ -161,24 +190,88 @@ const ChartCandlestick = ({ data }) => {
         }
     };
 
+    const defaultStockList = [
+        {
+            id: "C6L",
+            name: "Singapore Tech",
+            color: "blue"
+        },
+        {
+            id: "D89",
+            name: "Singapore Tele",
+            color: "purple"
+        },
+        {
+            id: "S65",
+            name: "Singapore Transport",
+            color: "pink"
+        },
+        {
+            id: "Z74",
+            name: "Wilmar Ltd.",
+            color: "blue"
+        },
+        {
+            id: "M45",
+            name: "Singapore Company Ltd.",
+            color: "green"
+        },
+        {
+            id: "M45",
+            name: "Singapore Company Ltd.",
+            color: "green"
+        },
+        {
+            id: "M45",
+            name: "Singapore Company Ltd.",
+            color: "green"
+        },
+    ]
+
+    const [stockList, setStockList] = useState(defaultStockList)
+
+    useEffect(() => {
+        console.log("series: ", seriesOptions);
+    }, [seriesOptions]);
+
+    const handleAddSeries = () => {
+        let updatedValue = {
+            name: "aapl",
+            data: [Math.random() * 10, Math.random() * 10, Math.random() * 10, Math.random() * 10, Math.random() * 10],
+        }
+        if (seriesOptions.length < COMPARE_LIMIT_MAX) {
+            setSeriesOptions(prevState => {
+                return [...prevState, updatedValue]
+            })
+        }
+    }
+
+    const handleRemoveSeries = () => {
+        if (seriesOptions.length > COMPARE_LIMIT_MIN) {
+            setSeriesOptions(prevState => {
+                return prevState.slice(0, -1)
+            })
+        }
+    }
+
     return (
         <div>
-            <h3>Stock Chart</h3>
-            <HighchartsReact
-                highcharts={Highcharts}
-                constructorType={'stockChart'}
-                options={options}
-            />
-            <div className="flex justify-endflex justify-start md:justify-end">
-                <Checkbox
-                    title="GUI"
-                    handleClick={(e) => setGuiEnabled(e.target.checked)}
-                    checked={isGuiEnabled}
-                    titleClassName={"ml-2"}
+            <h3>Compare Chart</h3>
+            <div>
+                <HighchartsReact
+                    ref={chartRef}
+                    highcharts={Highcharts}
+                    constructorType={'stockChart'}
+                    options={options}
                 />
             </div>
+            <div className="my-2">
+                <StockList stockList={stockList} setStockList={setStockList} />
+            </div>
+            <button className={`p-2 bg-green-500 text-white outline-gray`} onClick={handleAddSeries}>Add Series</button>
+            <button className={`p-2 bg-red-500 text-white outline-gray`} onClick={handleRemoveSeries}>Remove Latest Series</button>
         </div>
     )
 }
 
-export default ChartCandlestick
+export default ChartCompare

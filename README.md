@@ -25,9 +25,13 @@ Refer to https://tailwindcss.com/docs/responsive-design
 Notes : You only need to specify when a utility should start taking effect, not when it should stop.
 
 ```css
+mobile
+xs (start)	<640px	@media (min-width: 0px) { ... }
 sm	640px	@media (min-width: 640px) { ... }
+tablet
 md	768px	@media (min-width: 768px) { ... }
 lg	1024px	@media (min-width: 1024px) { ... }
+desktop
 xl	1280px	@media (min-width: 1280px) { ... }
 2xl	1536px	@media (min-width: 1536px) { ... }
 ```

@@ -4031,6 +4031,7 @@ let line = {
 }
 
 let dataLine = line.data.map(item => {
-  return [new Date(item.stock_date).getTime(), parseFloat(item.stock_close)]
+  // return [new Date(item.stock_date).getTime(), parseFloat(item.stock_close)]
+  return [new Date(item.stock_date).getTime(), parseFloat(Math.random() * 10)]
 })
 export default dataLine
