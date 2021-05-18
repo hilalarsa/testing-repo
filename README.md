@@ -18,7 +18,6 @@ npm run dev
 yarn dev
 ```
 
-
 ## Breakpoint Styling
 
 Refer to https://tailwindcss.com/docs/responsive-design
@@ -36,13 +35,23 @@ xl	1280px	@media (min-width: 1280px) { ... }
 2xl	1536px	@media (min-width: 1536px) { ... }
 ```
 
+Example styling, for case element invisible in mobile, and viewable in tablet & desktop
 
+```html
+<div className="hidden md:block"> </div>
+```
+
+Code above means, the element is initially hidden, but will be set to ```display:block``` on md size & up.
+
+
+# Server Run
 
 Open [http://localhost:<port_number>](http://localhost:<port_number>) with your browser to see the result.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about the project, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Tailwind CSS](https://tailwindcss.com/) - Tailwind documentation

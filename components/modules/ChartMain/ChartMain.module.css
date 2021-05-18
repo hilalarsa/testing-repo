@@ -1,4 +1,10 @@
 .toolsContainer{
     height: 600px;
     overflow-y: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .toolsContainer{
+    height: 300px;
   }
+} 

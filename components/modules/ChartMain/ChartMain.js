@@ -177,7 +177,7 @@ const ChartMain = ({ data }) => {
                 }
             })
         }
-    })
+    }, [indicatorMA])
 
     return (
         <div>

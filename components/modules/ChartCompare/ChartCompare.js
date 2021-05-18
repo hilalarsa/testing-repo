@@ -42,20 +42,18 @@ const ChartCompare = ({ data }) => {
     const chartRef = useRef() //create chart reference
     const [seriesOptions, setSeriesOptions] = useState([
         {
-            name: "aapl",
-            data: [Math.random() * 10, Math.random() * 10, Math.random() * 2, Math.random() * 10, Math.random() * 10],
+            id: "C6L",
+            name: "Singapore Tech",
+            color: "blue",
+            data: [Math.random() * 10, Math.random() * 5, Math.random() * 10, Math.random() * 2, Math.random() * 10],
         },
         {
-            name: "aapl2",
-            data: [Math.random() * 10, Math.random() * 5, Math.random() * 10, Math.random() * 2, Math.random() * 10],
+            id: "D89",
+            name: "Singapore Tele",
+            color: "purple",
+            data: [Math.random() * 10, Math.random() * 10, Math.random() * 2, Math.random() * 10, Math.random() * 10],
         }
     ])
-    // let seriesOptions = []
-
-    // seriesOptions[1] = {
-    //     name: "AAPL",
-    //     data: aapl
-    // };
 
     const options = {
         chart: {
@@ -236,7 +234,9 @@ const ChartCompare = ({ data }) => {
 
     const handleAddSeries = () => {
         let updatedValue = {
-            name: "aapl",
+            id: "C12",
+            color: "red",
+            name: "AAPL",
             data: [Math.random() * 10, Math.random() * 10, Math.random() * 10, Math.random() * 10, Math.random() * 10],
         }
         if (seriesOptions.length < COMPARE_LIMIT_MAX) {
@@ -266,7 +266,10 @@ const ChartCompare = ({ data }) => {
                 />
             </div>
             <div className="my-2">
-                <StockList stockList={stockList} setStockList={setStockList} />
+                <StockList
+                    stockList={seriesOptions}
+                    // setStockList={setStockList}
+                />
             </div>
             <button className={`p-2 bg-green-500 text-white outline-gray`} onClick={handleAddSeries}>Add Series</button>
             <button className={`p-2 bg-red-500 text-white outline-gray`} onClick={handleRemoveSeries}>Remove Latest Series</button>
