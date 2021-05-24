@@ -1,45 +1,177 @@
 import React, { useState, useEffect } from "react";
 
-import Head from "../components/modules/Head/Head.js"
-
-import Navbar from "../components/modules/Navbar/Navbar.js"
+import Head from "../components/elements/Head/Head.js"
+import Button from "../components/elements/Button/Button.js"
+import Snackbar from "../components/elements/Snackbar/Snackbar.js"
+import SearchInput from "../components/elements/Input/SearchInput.js"
+import Navbar from "../components/elements/Navbar/Navbar.js"
 import ChartMain from "../components/modules/ChartMain/ChartMain.js"
 import ChartVerticalBar from "../components/modules/ChartVerticalBar/ChartVerticalBar.js"
 import ChartMini from "../components/modules/ChartMini/ChartMini.js"
 import ChartCandlestick from "../components/modules/ChartCandlestick/ChartCandlestick.js"
 import ChartCompare from "../components/modules/ChartCompare/ChartCompare.js"
+import StockList from "../components/modules/StockList/ScrollStockList.js"
 
 import dataLine from "./api/data/line"
 import dataCandle from "./api/data/candle"
 
+import { AiOutlineUnorderedList, AiOutlineSearch } from "react-icons/ai"
+import { FiFilter } from "react-icons/fi"
+
+//START HIGHCHART INIT
+import Highcharts from "highcharts/highstock";
+import HighchartsReact from "highcharts-react-official";
+import HighchartMaps from "highcharts/modules/map";
+import HighchartStockTools from "highcharts/modules/stock-tools";
+import HighchartAnnotations from 'highcharts/modules/annotations-advanced';
+import HighchartFullscreen from 'highcharts/modules/full-screen';
+import HighchartPriceIndicators from 'highcharts/modules/price-indicator';
+import HighchartsExportData from "highcharts/modules/export-data";
+import HighchartDragPanes from "highcharts/modules/drag-panes.js";
+
+//indicators
+import HighchartIndicators from 'highcharts/indicators/indicators';
+import HighchartIndicatorsAll from 'highcharts/indicators/indicators-all';
+import IndicatorEma from 'highcharts/indicators/ema';
+import IndicatorBollinger from 'highcharts/indicators/bollinger-bands';
+
+if (typeof Highcharts === "object") {
+  HighchartMaps(Highcharts);
+  HighchartStockTools(Highcharts);
+  HighchartAnnotations(Highcharts);
+  HighchartFullscreen(Highcharts);
+  HighchartPriceIndicators(Highcharts);
+  HighchartsExportData(Highcharts);
+  HighchartDragPanes(Highcharts);
+  HighchartIndicators(Highcharts);
+  HighchartIndicatorsAll(Highcharts);
+  IndicatorEma(Highcharts)
+  IndicatorBollinger(Highcharts)
+}
+// END HIGHCHART INIT
+
 // export default function Home({ dataLine, dataCandle}) { // disabled for dummy data
+const seriesOptions = [
+  {
+    id: "C6L",
+    name: "Singapore Tech",
+    color: "blue",
+    data: [Math.random() * 10, Math.random() * 5, Math.random() * 10, Math.random() * 2, Math.random() * 10],
+  },
+  {
+    id: "D89",
+    name: "Singapore Tele",
+    color: "purple",
+    data: [Math.random() * 10, Math.random() * 10, Math.random() * 2, Math.random() * 10, Math.random() * 10],
+  },
+  {
+    id: "A12",
+    name: "Singapore Tele",
+    color: "red",
+    data: [Math.random() * 10, Math.random() * 10, Math.random() * 2, Math.random() * 10, Math.random() * 10],
+  },
+  {
+    id: "B23",
+    name: "Singapore Tele",
+    color: "yellow",
+    data: [Math.random() * 10, Math.random() * 10, Math.random() * 2, Math.random() * 10, Math.random() * 10],
+  },
+  {
+    id: "C34",
+    name: "Singapore Tele",
+    color: "pink",
+    data: [Math.random() * 10, Math.random() * 10, Math.random() * 2, Math.random() * 10, Math.random() * 10],
+  },
+]
 export default function Home() {
+
+  const [snackbarStatus, setSnackbarStatus] = useState(false)
+  const handleClickSnackbar = () => {
+    setSnackbarStatus(!snackbarStatus)
+    setTimeout(() => {
+      setSnackbarStatus(snackbarStatus)
+    }, 3000);
+  }
 
   return (
     <div>
       <Head />
       <Navbar />
       <div className="container mx-auto px-4 sm:px-6 md:px-10">
+
         <div className="my-2">
+          <StockList
+            stockList={seriesOptions}
+          // setStockList={setStockList}
+          />
+        </div>
+
+
+        <div className="flex flex-col space-y-2 max-w-full">
+          <div className="flex justify-between md:justify-start space-x-2">
+            <div className="hidden md:flex md:flex-grow">
+              <SearchInput
+                text={"Stocks Screener"}
+                icon={<AiOutlineSearch />}
+              />
+            </div>
+            <div className="flex-grow">
+              <Button
+                buttonClassname={"w-full"}
+                text={"My Watchlist"}
+                icon={<AiOutlineUnorderedList />}>
+              </Button>
+            </div>
+            <div className="flex-grow">
+              <Button
+                buttonClassname={"w-full"}
+                text={"Stocks Screener"}
+                icon={<FiFilter />}
+              />
+            </div>
+          </div>
+
+          <div className="flex md:hidden justify-start">
+            <SearchInput
+              text={"Stocks Screener"}
+              icon={<AiOutlineSearch />}
+            />
+          </div>
+        </div>
+
+      </div>
+      <div className="bg-gray-50 w-full h-16">
+        {/* Trending */}
+      </div>
+      {/* <div className="my-2">
           <ChartMain data={dataLine} />
-        </div>
+        </div> */}
 
-        <div className="my-2">
+      {/* <div className="my-2">
           <ChartCandlestick data={dataCandle} />
-        </div>
+        </div> */}
 
-        <div className="my-2">
+      {/* <div className="my-2">
           <ChartMini data={dataLine} />
         </div>
 
         <div className="my-2">
           <ChartCompare data={dataLine} />
-        </div>
+        </div> */}
 
-        {/* <ChartVerticalBar data={[1, -2, 3, -4, 5, -6]} category={"A", "B", "C", "D", "E", "F"} /> temp removed */}
+      {/* <ChartVerticalBar data={[1, -2, 3, -4, 5, -6]} category={"A", "B", "C", "D", "E", "F"} /> temp removed */}
 
+      <Button
+        text={"Toggle Snackbar"}
+        handleClick={handleClickSnackbar}
+      />
+      <div className="container mx-auto justify-center">
+        <Snackbar
+          open={snackbarStatus}
+          message={"Toggle Snackbar"}
+          anchorVertical={"top"}
+        />
       </div>
-
     </div >
   );
 }
