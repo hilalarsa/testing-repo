@@ -8,8 +8,10 @@ module.exports = {
         turqoise: "#51B7AE",
         "turqoise-100": "#EFFAF9",
         "blue-100": "#1B4F7B",
+        "blue-110": "#18476F",
         black: "#363435",
         "black-600": "#666666",
+        "black-40": "#999999",
       },
       outline: {
         gray: "1px solid #B3B3B3",
