@@ -1,39 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-
-import Highcharts, { chart } from "highcharts/highstock";
+import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
-import HighchartMaps from "highcharts/modules/map";
-import HighchartStockTools from "highcharts/modules/stock-tools";
-import HighchartAnnotations from 'highcharts/modules/annotations-advanced';
-import HighchartFullscreen from 'highcharts/modules/full-screen';
-import HighchartPriceIndicators from 'highcharts/modules/price-indicator';
-import HighchartsExportData from "highcharts/modules/export-data";
-import HighchartDragPanes from "highcharts/modules/drag-panes.js";
-
-//indicators
-import HighchartIndicators from 'highcharts/indicators/indicators';
-import HighchartIndicatorsAll from 'highcharts/indicators/indicators-all';
-import IndicatorEma from 'highcharts/indicators/ema';
-import IndicatorBollinger from 'highcharts/indicators/bollinger-bands';
 
 import Checkbox from "../../elements/Checkbox/Checkbox"
 
-import StockList from "../StockList/StockList"
+import StockList from "../StockList/ScrollStockList"
 import dataLine2 from "../../../pages/api/data/line2"
 
-if (typeof Highcharts === "object") {
-    HighchartMaps(Highcharts);
-    HighchartStockTools(Highcharts);
-    HighchartAnnotations(Highcharts);
-    HighchartFullscreen(Highcharts);
-    HighchartPriceIndicators(Highcharts);
-    HighchartsExportData(Highcharts);
-    HighchartDragPanes(Highcharts);
-    HighchartIndicators(Highcharts);
-    HighchartIndicatorsAll(Highcharts);
-    IndicatorEma(Highcharts)
-    IndicatorBollinger(Highcharts)
-}
 
 const COMPARE_LIMIT_MIN = 2
 const COMPARE_LIMIT_MAX = 5
@@ -142,32 +115,45 @@ const ChartCompare = ({ data }) => {
                 }
             },
             buttons: [{
+                type: 'day',
+                count: 20,
+                text: '1D',
+                dataGrouping: {
+                    forced: true,
+                    units: [['day', [1]]]
+                }
+            }, {
                 type: 'week',
-                count: 1,
-                text: '1W'
+                count: 20,
+                text: '1W',
+                dataGrouping: {
+                    forced: true,
+                    units: [['week', [1]]]
+                }
             }, {
                 type: 'month',
-                count: 1,
-                text: '1M'
+                count: 20,
+                text: '1M',
+                dataGrouping: {
+                    forced: true,
+                    units: [['month', [1]]]
+                }
             }, {
                 type: 'month',
-                count: 6,
-                text: '6M'
+                count: 20,
+                text: '6M',
+                dataGrouping: {
+                    forced: true,
+                    units: [['month', [6]]]
+                }
             }, {
                 type: 'year',
-                count: 1,
-                text: '1Y'
-            }, {
-                type: 'year',
-                count: 3,
-                text: '3Y'
-            }, {
-                type: 'year',
-                count: 5,
-                text: '5Y'
-            }, {
-                type: 'all',
-                text: 'All'
+                count: 10,
+                text: '1Y',
+                dataGrouping: {
+                    forced: true,
+                    units: [['year', [1]]]
+                }
             }],
             selected: 3
         },
@@ -234,9 +220,9 @@ const ChartCompare = ({ data }) => {
 
     const handleAddSeries = () => {
         let updatedValue = {
-            id: "C12",
+            id: "C12"+parseInt(Math.random() * 10),
             color: "red",
-            name: "AAPL",
+            name: "AAPL"+parseInt(Math.random() * 10),
             data: [Math.random() * 10, Math.random() * 10, Math.random() * 10, Math.random() * 10, Math.random() * 10],
         }
         if (seriesOptions.length < COMPARE_LIMIT_MAX) {
@@ -268,6 +254,7 @@ const ChartCompare = ({ data }) => {
             <div className="my-2">
                 <StockList
                     stockList={seriesOptions}
+                    withAddStock
                     // setStockList={setStockList}
                 />
             </div>

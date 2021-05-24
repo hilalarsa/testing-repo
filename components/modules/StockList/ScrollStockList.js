@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import StockLabel from "../../elements/StockLabel/StockLabel"
+import StockLabel from "../StockLabel/StockLabel"
 import { AiOutlinePlus } from 'react-icons/ai'
 
-const StockList = ({ stockList }) => {
+const ScrollStockList = ({ stockList, withAddStock = false }) => {
 
     return (
         <div className="flex flex-row overflow-auto py-5">
@@ -18,13 +18,15 @@ const StockList = ({ stockList }) => {
                     />
                 </div>
             )}
-            <div className={`flex w-30 md:w-60 p-3 justify-left items-start outline-gray cursor-pointer rounded-xl  mx-2`}>
-                <div><AiOutlinePlus color="#51B7AE" /></div>
-                {/* <div className={`text-sm px-2 rounded-full bg-green-500 text-white font-bold`}></div> */}
-                <div className={`text-green-500 font-medium`}>{"Add Stocks"}</div>
-            </div>
+            {withAddStock &&
+                <div className={`flex w-30 md:w-60 p-3 justify-left items-start outline-gray cursor-pointer rounded-xl  mx-2`}>
+                    <div><AiOutlinePlus color="#51B7AE" /></div>
+                    {/* <div className={`text-sm px-2 rounded-full bg-green-500 text-white font-bold`}></div> */}
+                    <div className={`text-green-500 font-medium`}>{"Add Stocks"}</div>
+                </div>
+            }
         </div>
     )
 }
 
-export default StockList
+export default ScrollStockList
