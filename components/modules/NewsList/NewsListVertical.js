@@ -1,5 +1,5 @@
 const NewsListVertical = () => (
-  <div>
+  <div className="cursor-pointer">
     <img
       src="https://s3-ap-northeast-1.amazonaws.com/psh-ex-ftnikkei-3937bb4/images/2/1/8/0/23520812-2-eng-GB/Cropped-157381478320191115%20Singtel.jpg"
       alt="news-images"
