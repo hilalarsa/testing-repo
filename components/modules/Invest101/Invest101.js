@@ -2,12 +2,12 @@ import Link from "next/link";
 
 const Invest101 = () => (
   <Link href="/invest-101/:slug">
-    <>
+    <div>
       <div className="cursor-pointer border rounded-lg p-2 mb-4">
         <img
-          src="/images/invest-101/financial-growth 1.jpg"
+          src="/images/invest-101/dbs.jpg"
           alt="invest-101-image"
-          className="mb-4"
+          className="mb-4 rounded-lg"
         />
         <p className="font-medium text-xs text-turqoise mb-2">INVESTING 101</p>
         <p className="font-bold text-lg tracking-wide text-blue-110 mb-2">
@@ -27,7 +27,7 @@ const Invest101 = () => (
         </div>
       </div>
       <div className="mb-4 dashed-line-grey"></div>
-    </>
+    </div>
   </Link>
 );
 
