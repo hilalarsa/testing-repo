@@ -12,7 +12,7 @@ const Button = ({ handleClick, handleChange, buttonClassname = "", buttonName = 
         className={"border border-gray-500 rounded-lg p-2 " + buttonClassname}
         type="button"
     >
-        <div className="flex items-center justify-around space-x-2">
+        <div className="flex items-center justify-start space-x-2">
             <div>{icon}</div>
             <div>{text}</div>
         </div>

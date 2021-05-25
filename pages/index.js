@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Head from "../components/elements/Head/Head.js"
+import Accordion from "../components/elements/Accordion/Accordion.js"
 import Button from "../components/elements/Button/Button.js"
 import Snackbar from "../components/elements/Snackbar/Snackbar.js"
 import SearchInput from "../components/elements/Input/SearchInput.js"
@@ -10,7 +11,8 @@ import ChartVerticalBar from "../components/modules/ChartVerticalBar/ChartVertic
 import ChartMini from "../components/modules/ChartMini/ChartMini.js"
 import ChartCandlestick from "../components/modules/ChartCandlestick/ChartCandlestick.js"
 import ChartCompare from "../components/modules/ChartCompare/ChartCompare.js"
-import StockList from "../components/modules/StockList/ScrollStockList.js"
+import ScrollStockList from "../components/modules/StockList/ScrollStockList.js"
+import TrendingStockList from "../components/modules/StockList/TrendingStockList.js"
 
 import dataLine from "./api/data/line"
 import dataCandle from "./api/data/candle"
@@ -100,48 +102,70 @@ export default function Home() {
       <div className="container mx-auto px-4 sm:px-6 md:px-10">
 
         <div className="my-2">
-          <StockList
+          <ScrollStockList
             stockList={seriesOptions}
           // setStockList={setStockList}
           />
         </div>
 
+        <div className="flex flex-grow md:space-x-10">
+          <div className="w-full md:w-2/3"> {/* left section desktop */}
+            <div className="flex flex-col space-y-2 max-w-full">
 
-        <div className="flex flex-col space-y-2 max-w-full">
-          <div className="flex justify-between md:justify-start space-x-2">
-            <div className="hidden md:flex md:flex-grow">
-              <SearchInput
-                text={"Stocks Screener"}
-                icon={<AiOutlineSearch />}
-              />
+              <div className="flex justify-between md:justify-start space-x-2">
+                <div className="hidden md:flex md:flex-grow w-full md:w-1/2"> {/**  hidden on mobile */}
+                  <SearchInput
+                    text={"Stocks Screener"}
+                    icon={<AiOutlineSearch />}
+                  />
+                </div>
+                <div className="flex-grow w-full md:w-1/4">
+                  <Button
+                    buttonClassname={"w-full"}
+                    text={"My Watchlist"}
+                    icon={<AiOutlineUnorderedList />}>
+                  </Button>
+                </div>
+                <div className="flex-grow w-full md:w-1/4">
+                  <Button
+                    buttonClassname={"w-full"}
+                    text={"Stocks Screener"}
+                    icon={<FiFilter />}
+                  />
+                </div>
+              </div>
+              <div className="flex md:hidden justify-start"> {/**  hidden on desktop */}
+                <SearchInput
+                  text={"Stocks Screener"}
+                  icon={<AiOutlineSearch />}
+                />
+              </div>
+              <div className="flex">
+
+              </div>
             </div>
-            <div className="flex-grow">
-              <Button
-                buttonClassname={"w-full"}
-                text={"My Watchlist"}
-                icon={<AiOutlineUnorderedList />}>
-              </Button>
-            </div>
-            <div className="flex-grow">
-              <Button
-                buttonClassname={"w-full"}
-                text={"Stocks Screener"}
-                icon={<FiFilter />}
-              />
-            </div>
+
           </div>
 
-          <div className="flex md:hidden justify-start">
-            <SearchInput
-              text={"Stocks Screener"}
-              icon={<AiOutlineSearch />}
-            />
+          {/* right section desktop */}
+          <div className="md:w-1/3">
+            {/* Add to wishlist banner */}
+            {/* Stock Ranking */}
           </div>
         </div>
 
       </div>
-      <div className="bg-gray-50 w-full h-16">
-        {/* Trending */}
+
+      <Accordion headerText="Trending">
+        <TrendingStockList
+          stockList={seriesOptions}
+        // setStockList={setStockList}
+        />
+      </Accordion>
+
+      <div className="container mx-auto px-4 sm:px-6 flex md:hidden bg-gray-50 w-full m-0 justify-between items-center h-16">
+        <div className="">Ranking</div>
+        <div className="">View More</div>
       </div>
       {/* <div className="my-2">
           <ChartMain data={dataLine} />
@@ -165,9 +189,9 @@ export default function Home() {
         text={"Toggle Snackbar"}
         handleClick={handleClickSnackbar}
       />
-      <div className="container mx-auto justify-center">
+      <div className="container mx-auto flex justify-center items-center">
         <Snackbar
-          open={snackbarStatus}
+          state={snackbarStatus}
           message={"Toggle Snackbar"}
           anchorVertical={"top"}
         />
