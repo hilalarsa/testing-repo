@@ -6,8 +6,8 @@
     "dev": "node server.js",
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server.js",
-    "storybook": "start-storybook -p 6006",
-    "storybook:build": "build-storybook"
+    "storybook": "start-storybook -s ./public -p 6006",
+    "storybook:build": "build-storybook -s public"
   },
   "dependencies": {
     "cross-env": "^7.0.3",
