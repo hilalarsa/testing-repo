@@ -9,3 +9,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
+
+/* Helper Classes */
+.dashed-line-grey {
+  border-top: 3px dashed #cccccc;
+}

@@ -1,13 +1,13 @@
-import Navbar from "../../components/modules/Navbar/Navbar.js";
+import Invest101 from "./Invest101";
 
-const Story = () => <Navbar />;
+const Story = () => <Invest101 />;
 
 // Here we export a variant of the default template without passing props
-export const Base = Story.bind({});
+export const List = Story.bind({});
 
 // Here we export the default component that
 // will be used by Storybook to show it inside the sidebar
 export default {
-  title: "Navbar",
-  component: Navbar,
+  title: "Components/Invest 101/List",
+  component: Invest101,
 };
