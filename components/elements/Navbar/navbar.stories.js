@@ -1,4 +1,4 @@
-import Navbar from "../../components/modules/Navbar/Navbar.js";
+import Navbar from "./Navbar";
 
 const Story = () => <Navbar />;
 
@@ -8,6 +8,6 @@ export const Base = Story.bind({});
 // Here we export the default component that
 // will be used by Storybook to show it inside the sidebar
 export default {
-  title: "Navbar",
+  title: "Components/Navbar/Base",
   component: Navbar,
 };
