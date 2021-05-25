@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PropTypes from "prop-types";
 
-const NewsListVertical = ({ imgSrc }) => (
+const NewsListHorizontal = ({ imgSrc }) => (
   <Link href="/news/:slug">
     <div className="cursor-pointer">
       <div className="grid grid-cols-3 gap-2">
@@ -35,8 +35,13 @@ const NewsListVertical = ({ imgSrc }) => (
   </Link>
 );
 
-NewsListVertical.propTypes = {
+NewsListHorizontal.propTypes = {
+  /** set image thumbnail, will show only if the image is available */
   imgSrc: PropTypes.string,
 };
 
-export default NewsListVertical;
+NewsListHorizontal.defaultProps = {
+  imgSrc: "",
+};
+
+export default NewsListHorizontal;
