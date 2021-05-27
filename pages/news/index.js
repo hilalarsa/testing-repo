@@ -18,9 +18,8 @@ const News = () => (
       <NewsListHorizontal />
       <Button
         text="View more news"
-        className="w-full text-center mb-2 py-2 font-medium text-xs"
-        bgColor="bg-turqoise-100"
-        textColor="text-turqoise"
+        buttonClassName="w-full mb-2 py-2 bg-turqoise-100"
+        textClassName="text-center font-medium text-xs text-turqoise"
       />
     </div>
   </>
