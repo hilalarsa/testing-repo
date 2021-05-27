@@ -7,6 +7,7 @@ module.exports = {
       colors: {
         turqoise: "#51B7AE",
         "turqoise-100": "#EFFAF9",
+        "turqoise-110": "#51B7AE",
         "blue-100": "#1B4F7B",
         "blue-110": "#18476F",
         black: "#363435",

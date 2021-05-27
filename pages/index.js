@@ -99,7 +99,7 @@ export default function Home() {
     <div>
       <Head />
       <Navbar />
-      <div className="container mx-auto px-4 sm:px-6 md:px-10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-10 bg-gray-50">
 
         <div className="my-2">
           <ScrollStockList
@@ -107,6 +107,9 @@ export default function Home() {
           // setStockList={setStockList}
           />
         </div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 md:px-10">
 
         <div className="flex flex-grow md:space-x-10">
           <div className="w-full md:w-2/3"> {/* left section desktop */}
@@ -116,28 +119,32 @@ export default function Home() {
                 <div className="hidden md:flex md:flex-grow w-full md:w-1/2"> {/**  hidden on mobile */}
                   <SearchInput
                     text={"Stocks Screener"}
-                    icon={<AiOutlineSearch />}
+                    icon={<AiOutlineSearch color="white" />}
                   />
                 </div>
                 <div className="flex-grow w-full md:w-1/4">
                   <Button
-                    buttonClassname={"w-full"}
+                    buttonClassName={"w-full border border-gray-500"}
+                    textClassName="flex justify-start"
                     text={"My Watchlist"}
-                    icon={<AiOutlineUnorderedList />}>
+                    withIcon
+                    iconLeft={<AiOutlineUnorderedList />}>
                   </Button>
                 </div>
                 <div className="flex-grow w-full md:w-1/4">
                   <Button
-                    buttonClassname={"w-full"}
+                    buttonClassName={"w-full border border-gray-500"}
+                    textClassName="flex justify-start"
                     text={"Stocks Screener"}
-                    icon={<FiFilter />}
+                    withIcon
+                    iconLeft={<FiFilter />}
                   />
                 </div>
               </div>
               <div className="flex md:hidden justify-start"> {/**  hidden on desktop */}
                 <SearchInput
                   text={"Stocks Screener"}
-                  icon={<AiOutlineSearch />}
+                  icon={<AiOutlineSearch color="white" />}
                 />
               </div>
               <div className="flex">
@@ -163,10 +170,13 @@ export default function Home() {
         />
       </Accordion>
 
-      <div className="container mx-auto px-4 sm:px-6 flex md:hidden bg-gray-50 w-full m-0 justify-between items-center h-16">
-        <div className="">Ranking</div>
-        <div className="">View More</div>
-      </div>
+      <Accordion headerText="Ranking">
+        <TrendingStockList
+          stockList={seriesOptions}
+        // setStockList={setStockList}
+        />
+      </Accordion>
+
       {/* <div className="my-2">
           <ChartMain data={dataLine} />
         </div> */}
@@ -185,7 +195,7 @@ export default function Home() {
 
       {/* <ChartVerticalBar data={[1, -2, 3, -4, 5, -6]} category={"A", "B", "C", "D", "E", "F"} /> temp removed */}
 
-      <Button
+      {/* <Button
         text={"Toggle Snackbar"}
         handleClick={handleClickSnackbar}
       />
@@ -195,7 +205,7 @@ export default function Home() {
           message={"Toggle Snackbar"}
           anchorVertical={"top"}
         />
-      </div>
+      </div> */}
     </div >
   );
 }

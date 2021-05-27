@@ -1,6 +1,6 @@
 import Head from "../../components/elements/Head/Head.js";
 import Navbar from "../../components/elements/Navbar/Navbar.js";
-import ButtonBorderless from "../../components/elements/Button/ButtonBorderless";
+import Button from "../../components/elements/Button/Button";
 import Invest101 from "../../components/modules/Invest101/Invest101";
 
 const Invest101Page = () => (
@@ -15,7 +15,12 @@ const Invest101Page = () => (
       <Invest101 />
       <Invest101 />
       <Invest101 />
-      <ButtonBorderless text="View more articles" />
+      <Button
+        text="View more articles"
+        className="w-full text-center mb-2 py-2 font-medium text-xs"
+        bgColor="bg-turqoise-100"
+        textColor="text-turqoise"
+      />
     </div>
   </>
 );

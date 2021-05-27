@@ -6,12 +6,12 @@ import { AiOutlinePlus } from 'react-icons/ai'
 const ScrollStockList = ({ stockList, withAddStock = false }) => {
 
     return (
-        <div className="flex flex-row overflow-auto py-5">
+        <div className="flex flex-row overflow-auto py-2">
             {stockList.map((item, index) =>
                 <div key={index} className="flex">
                     <StockLabel
                         key={index}
-                        className="flex-col w-40 md:w-60 mx-2"
+                        className="flex-col py-5 w-40 md:w-60 mx-2 bg-white"
                         withIcon iconText={item.id}
                         iconBgColor={item.color}
                         text={item.name}

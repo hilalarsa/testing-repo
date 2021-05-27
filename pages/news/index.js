@@ -1,6 +1,6 @@
 import Head from "../../components/elements/Head/Head.js";
 import Navbar from "../../components/elements/Navbar/Navbar.js";
-import ButtonBorderless from "../../components/elements/Button/ButtonBorderless";
+import Button from "../../components/elements/Button/Button";
 import NewsListVertical from "../../components/modules/NewsList/NewsListVertical";
 import NewsListHorizontal from "../../components/modules/NewsList/NewsListHorizontal";
 
@@ -16,7 +16,12 @@ const News = () => (
       <NewsListHorizontal imgSrc="https://s3-ap-northeast-1.amazonaws.com/psh-ex-ftnikkei-3937bb4/images/2/1/8/0/23520812-2-eng-GB/Cropped-157381478320191115%20Singtel.jpg" />
       <NewsListHorizontal />
       <NewsListHorizontal />
-      <ButtonBorderless text="View more news" />
+      <Button
+        text="View more news"
+        className="w-full text-center mb-2 py-2 font-medium text-xs"
+        bgColor="bg-turqoise-100"
+        textColor="text-turqoise"
+      />
     </div>
   </>
 );

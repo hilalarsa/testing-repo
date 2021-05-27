@@ -1,5 +1,5 @@
 import { AiFillCheckCircle } from "react-icons/ai"
-
+import PropTypes from "prop-types"
 const Snackbar = ({ state, message = "", variant = "info" }) => {
 
     return (
@@ -17,9 +17,6 @@ const Snackbar = ({ state, message = "", variant = "info" }) => {
             .down{
                 top: -300px;
             }
-            .info{
-                color:
-            }
             .snackbar {
                 position: fixed;
                 z-index: 9999;
@@ -35,4 +32,16 @@ const Snackbar = ({ state, message = "", variant = "info" }) => {
         </>
     );
 }
+
+Snackbar.propTypes = {
+  message: PropTypes.bool.isRequired, //* component rendered inside Snackbar
+  state: PropTypes.string.isRequired, //* header text on clickable section of Snackbar 
+  variant: PropTypes.string
+}
+
+Snackbar.defaultProps = {
+    state: true,
+    message: "Hello world",
+    variant: "info",
+};
 export default Snackbar
