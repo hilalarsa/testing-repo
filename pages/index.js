@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 
-import Head from "../components/elements/Head/Head.js"
-import Accordion from "../components/elements/Accordion/Accordion.js"
-import Button from "../components/elements/Button/Button.js"
-import Snackbar from "../components/elements/Snackbar/Snackbar.js"
-import SearchInput from "../components/elements/Input/SearchInput.js"
-import Navbar from "../components/elements/Navbar/Navbar.js"
-import ChartMain from "../components/modules/ChartMain/ChartMain.js"
-import ChartVerticalBar from "../components/modules/ChartVerticalBar/ChartVerticalBar.js"
-import ChartMini from "../components/modules/ChartMini/ChartMini.js"
-import ChartCandlestick from "../components/modules/ChartCandlestick/ChartCandlestick.js"
-import ChartCompare from "../components/modules/ChartCompare/ChartCompare.js"
-import ScrollStockList from "../components/modules/StockList/ScrollStockList.js"
-import TrendingStockList from "../components/modules/StockList/TrendingStockList.js"
+import Head from "../components/elements/Head/Head"
+import Accordion from "../components/elements/Accordion/Accordion"
+import Button from "../components/elements/Button/Button"
+import Snackbar from "../components/elements/Snackbar/Snackbar"
+import SearchInput from "../components/elements/Input/SearchInput"
+import Navbar from "../components/elements/Navbar/Navbar"
+import Footer from "../components/elements/Footer/Footer"
+
+import ChartMain from "../components/modules/ChartMain/ChartMain"
+import ChartVerticalBar from "../components/modules/ChartVerticalBar/ChartVerticalBar"
+import ChartMini from "../components/modules/ChartMini/ChartMini"
+import ChartCandlestick from "../components/modules/ChartCandlestick/ChartCandlestick"
+import ChartCompare from "../components/modules/ChartCompare/ChartCompare"
+import ScrollStockList from "../components/modules/StockList/ScrollStockList"
+import TrendingStockList from "../components/modules/StockList/TrendingStockList"
 
 import dataLine from "./api/data/line"
 import dataCandle from "./api/data/candle"
@@ -29,7 +31,7 @@ import HighchartAnnotations from 'highcharts/modules/annotations-advanced';
 import HighchartFullscreen from 'highcharts/modules/full-screen';
 import HighchartPriceIndicators from 'highcharts/modules/price-indicator';
 import HighchartsExportData from "highcharts/modules/export-data";
-import HighchartDragPanes from "highcharts/modules/drag-panes.js";
+import HighchartDragPanes from "highcharts/modules/drag-panes";
 
 //indicators
 import HighchartIndicators from 'highcharts/indicators/indicators';
@@ -87,11 +89,12 @@ const seriesOptions = [
 ]
 export default function Home() {
 
-  const [snackbarStatus, setSnackbarStatus] = useState(false)
+  const [snackbarStatus, setSnackbarStatus] = useState("")
   const handleClickSnackbar = () => {
-    setSnackbarStatus(!snackbarStatus)
+    console.log("click snackbar")
+    setSnackbarStatus(true)
     setTimeout(() => {
-      setSnackbarStatus(snackbarStatus)
+      setSnackbarStatus(false)
     }, 3000);
   }
 
@@ -195,7 +198,7 @@ export default function Home() {
 
       {/* <ChartVerticalBar data={[1, -2, 3, -4, 5, -6]} category={"A", "B", "C", "D", "E", "F"} /> temp removed */}
 
-      {/* <Button
+      <Button
         text={"Toggle Snackbar"}
         handleClick={handleClickSnackbar}
       />
@@ -203,10 +206,12 @@ export default function Home() {
         <Snackbar
           state={snackbarStatus}
           message={"Toggle Snackbar"}
-          anchorVertical={"top"}
         />
-      </div> */}
-    </div >
+      </div>
+      <div className="container mx-auto bg-black-100">
+        <Footer />
+      </div>
+    </div>
   );
 }
 

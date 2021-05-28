@@ -1,10 +1,20 @@
 import { AiFillCheckCircle } from "react-icons/ai"
 import PropTypes from "prop-types"
-const Snackbar = ({ state, message = "", variant = "info" }) => {
+import { useState, useEffect } from "react";
+const Snackbar = ({ state = "", message = "", variant = "info" }) => {
+
+    const [animation, setAnimation] = useState({})
+    useEffect(() => {
+        if(state == true){
+            setAnimation("animate-fadein up")
+        }else if(state == false){
+            setAnimation("animate-fadeout down")
+        }
+    },[state])
 
     return (
         <>
-            <div className={`snackbar flex justify-center items-center space-x-2 ${variant} ${state ? 'animate-fadein up' : 'animate-fadeout down'}`}>
+            <div className={`snackbar flex justify-center items-center space-x-2 ${variant} ${animation}`}>
                 <AiFillCheckCircle size={20} />
                 <div>
                     {message}
@@ -34,14 +44,14 @@ const Snackbar = ({ state, message = "", variant = "info" }) => {
 }
 
 Snackbar.propTypes = {
-  message: PropTypes.bool.isRequired, //* component rendered inside Snackbar
-  state: PropTypes.string.isRequired, //* header text on clickable section of Snackbar 
-  variant: PropTypes.string
+    message: PropTypes.bool.isRequired, //* component rendered inside Snackbar
+    state: PropTypes.string.isRequired, //* header text on clickable section of Snackbar 
+    variant: PropTypes.string
 }
 
 Snackbar.defaultProps = {
     state: true,
-    message: "Hello world",
+    message: "",
     variant: "info",
 };
 export default Snackbar
