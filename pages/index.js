@@ -15,6 +15,7 @@ import ChartCandlestick from "../components/modules/ChartCandlestick/ChartCandle
 import ChartCompare from "../components/modules/ChartCompare/ChartCompare"
 import ScrollStockList from "../components/modules/StockList/ScrollStockList"
 import TrendingStockList from "../components/modules/StockList/TrendingStockList"
+import RankingStockList from "../components/modules/StockList/RankingStockList.js"
 
 import dataLine from "./api/data/line"
 import dataCandle from "./api/data/candle"
@@ -118,26 +119,28 @@ export default function Home() {
           <div className="w-full md:w-2/3"> {/* left section desktop */}
             <div className="flex flex-col space-y-2 max-w-full">
 
-              <div className="flex justify-between md:justify-start space-x-2">
+              <div className="flex justify-between md:justify-start">
                 <div className="hidden md:flex md:flex-grow w-full md:w-1/2"> {/**  hidden on mobile */}
                   <SearchInput
                     text={"Stocks Screener"}
+                    placeholder={"Search symbol or stock name"}
                     icon={<AiOutlineSearch color="white" />}
                   />
                 </div>
-                <div className="flex-grow w-full md:w-1/4">
+                <div className="w-full md:w-1/4">
                   <Button
-                    buttonClassName={"w-full border border-gray-500"}
-                    textClassName="flex justify-start"
+                    buttonClassName={"w-full border border-turqoise-110"}
+                    textClassName="flex flex-grow justify-center text-turqoise-110"
                     text={"My Watchlist"}
                     withIcon
                     iconLeft={<AiOutlineUnorderedList />}>
                   </Button>
                 </div>
-                <div className="flex-grow w-full md:w-1/4">
+                <div className="mx-2"></div>
+                <div className="w-full md:w-1/4">
                   <Button
                     buttonClassName={"w-full border border-gray-500"}
-                    textClassName="flex justify-start"
+                    textClassName="flex flex-grow justify-center"
                     text={"Stocks Screener"}
                     withIcon
                     iconLeft={<FiFilter />}
@@ -147,11 +150,9 @@ export default function Home() {
               <div className="flex md:hidden justify-start"> {/**  hidden on desktop */}
                 <SearchInput
                   text={"Stocks Screener"}
+                  placeholder={"Search symbol or stock name"}
                   icon={<AiOutlineSearch color="white" />}
                 />
-              </div>
-              <div className="flex">
-
               </div>
             </div>
 
@@ -174,7 +175,7 @@ export default function Home() {
       </Accordion>
 
       <Accordion headerText="Ranking">
-        <TrendingStockList
+        <RankingStockList
           stockList={seriesOptions}
         // setStockList={setStockList}
         />
@@ -198,7 +199,7 @@ export default function Home() {
 
       {/* <ChartVerticalBar data={[1, -2, 3, -4, 5, -6]} category={"A", "B", "C", "D", "E", "F"} /> temp removed */}
 
-      <Button
+      {/* <Button
         text={"Toggle Snackbar"}
         handleClick={handleClickSnackbar}
       />
@@ -207,7 +208,7 @@ export default function Home() {
           state={snackbarStatus}
           message={"Toggle Snackbar"}
         />
-      </div>
+      </div> */}
       <div className="container mx-auto bg-black-100">
         <Footer />
       </div>

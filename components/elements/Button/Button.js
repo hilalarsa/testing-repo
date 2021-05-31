@@ -15,7 +15,7 @@ const Button = ({ handleClick, handleChange, buttonClassName = "", textClassName
     >
         <div className={`items-center ${textClassName}`}>
             {withIcon && iconLeft != "" && <div>{iconLeft}</div>}
-            <div>{text}</div>
+            <div className="px-2">{text}</div>
             {withIcon && iconRight != "" && <div>{iconRight}</div>}
         </div>
         {children}
@@ -30,8 +30,8 @@ Button.propTypes = {
   handleChange: PropTypes.func,
   handleClick: PropTypes.func,
   icon: PropTypes.string,
-  iconLeft: PropTypes.string, // icon for button on left side
-  iconRight: PropTypes.string, // icon for button on left side
+  iconLeft: PropTypes.elementType, // icon for button on left side
+  iconRight: PropTypes.elementType, // icon for button on left side
   initialValue: PropTypes.string, // button click initial value
   text: PropTypes.string, // text inside button
   textClassName: PropTypes.string,

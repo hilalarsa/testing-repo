@@ -27,13 +27,15 @@ const Snackbar = ({ state = "", message = "", variant = "info" }) => {
             .down{
                 top: -300px;
             }
+            .info{
+                color: #49A456;
+                background-color: #EEF8EF;
+            }
             .snackbar {
                 position: fixed;
                 z-index: 9999;
                 min-width: 250px;
                 font-weight: 500;
-                background-color: #EEF8EF;
-                color: #49A456;
                 text-align: left;
                 border-radius: 8px;
                 padding: 12px;

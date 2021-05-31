@@ -1,4 +1,4 @@
-const SearchInput = ({ handleClick, handleChange, inputClassname = "", inputName = "", text = "", initialValue = "", disabled = false, icon = ""}) => (
+const SearchInput = ({ handleClick, handleChange, inputClassname = "", inputName = "", placeholder = "", initialValue = "", disabled = false, icon = ""}) => (
     <>
     <input
         onClick={e => {
@@ -10,6 +10,7 @@ const SearchInput = ({ handleClick, handleChange, inputClassname = "", inputName
         name={inputName}
         disabled={disabled}
         value={initialValue}
+        placeholder={placeholder}
         className={"flex-grow border border-gray-500 rounded-lg p-2 " + inputClassname}
         type="text"
     />

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import ListStockLabel from "../StockLabel/ListStockLabel"
-import { AiOutlinePlus } from 'react-icons/ai'
 
 const TrendingStockList = ({ stockList }) => {
 
