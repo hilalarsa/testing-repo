@@ -1,5 +1,6 @@
-import Head from "../../components/elements/Head/Head.js";
-import Navbar from "../../components/elements/Navbar/Navbar.js";
+import Head from "../../components/elements/Head/Head";
+import Footer from "../../components/elements/Footer/Footer";
+import Navbar from "../../components/elements/Navbar/Navbar";
 import Button from "../../components/elements/Button/Button";
 import Invest101 from "../../components/modules/Invest101/Invest101";
 
@@ -20,6 +21,9 @@ const Invest101Page = () => (
         buttonClassName="w-full mb-2 py-2 bg-turqoise-100"
         textClassName="text-center font-medium text-xs text-turqoise"
       />
+    </div>
+    <div className="container mx-auto bg-black-100">
+      <Footer />
     </div>
   </>
 );
