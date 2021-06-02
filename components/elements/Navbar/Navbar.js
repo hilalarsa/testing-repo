@@ -3,6 +3,8 @@ import { AiOutlineArrowRight } from 'react-icons/ai'
 import { GoThreeBars } from "react-icons/go"
 
 import Button from "../Button/Button"
+import EmailInput from "../Input/EmailInput"
+import PasswordInput from "../Input/PasswordInput"
 
 const navbarBeforeLoginContent = [{
     title: "Market",
@@ -82,6 +84,7 @@ const navbarBeforeLoginContent = [{
 
 export default function Navbar() {
     const [popupStatus, setPopupStatus] = useState(false)
+    const [navbarState, setNavbarState] = useState("initial")
 
     const handleDropdownClick = () => {
         setPopupStatus(!popupStatus)
@@ -120,55 +123,90 @@ export default function Navbar() {
                         </div>
                         <div className="absolute top-12 w-full z-50 md:w-60 md:left-0">
                             <div className={`${popupStatus ? "visible" : "hidden"} origin-top-right mt-5 rounded-md shadow-lg p-2 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none`} role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
-                                {navbarBeforeLoginContent.map((item) => {
-                                    return (
-                                        <>
-                                            <div>
-                                                <div className="text-sm text-gray-700">{item.title}</div>
-                                            </div>
-                                            <div className="flex flex-wrap justify-start">
-                                                {item.content.map((itemContent, index) => {
-                                                    return (
-                                                        <div key={index} className="flex p-3 w-1/2">
-                                                            <a href={itemContent.url} className="flex justify-center h-6">
-                                                                <img src={itemContent.icon} />
-                                                                <div>{itemContent.title}</div>
-                                                            </a>
+                                {navbarState == "initial" &&
+                                    <>
+                                        {
+                                            navbarBeforeLoginContent.map((item) => {
+                                                return (
+                                                    <>
+                                                        <div>
+                                                            <div className="text-sm text-gray-700">{item.title}</div>
                                                         </div>
-                                                    )
-                                                })}
-                                            </div>
+                                                        <div className="flex flex-wrap justify-start">
+                                                            {item.content.map((itemContent, index) => {
+                                                                return (
+                                                                    <div key={index} className="flex p-3 w-1/2">
+                                                                        <a href={itemContent.url} className="flex justify-center h-6">
+                                                                            <img src={itemContent.icon} />
+                                                                            <div>{itemContent.title}</div>
+                                                                        </a>
+                                                                    </div>
+                                                                )
+                                                            })}
+                                                        </div>
 
-                                        </>
-                                    )
-                                })}
-                                <div className="flex justify-center bg-turqoise-100 py-2 rounded-lg my-2">
-                                    <Button
-                                        text="Login"
-                                        withIcon
-                                        iconRight={<AiOutlineArrowRight color="white" />}
-                                        buttonClassName="w-1/3 bg-turqoise-110"
-                                        textClassName="flex justify-center space-x-2 font-bold text-white"
-                                    />
-                                </div>
+                                                    </>
+                                                )
+                                            })
+                                        }
+
+                                        <div className="flex justify-center bg-turqoise-100 py-2 rounded-lg my-2">
+                                            <Button
+                                                handleClick={() => { setNavbarState("login") }}
+                                                text="Login"
+                                                withIcon
+                                                iconRight={<AiOutlineArrowRight color="white" />}
+                                                buttonClassName="w-1/3 bg-turqoise-110"
+                                                textClassName="flex justify-center space-x-2 font-bold text-white"
+                                            />
+                                        </div>
+                                    </>
+                                }
+
+                                {navbarState == "login" &&
+                                    <>
+                                        <div className="mx-4 my-8">
+                                            <div className="text-2xl text-blue-100 font-semibold my-4">Login to Your Account</div>
+                                            <div className="flex flex-col">
+                                                <EmailInput
+                                                    name="email"
+                                                    type="email"
+                                                    placeholder="example@email.com"
+                                                    label="Email"
+                                                    labelClassName="w-full text-blue-110"
+                                                    inputClassName="w-full"
+                                                />
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <PasswordInput
+                                                    handleForgotPassword={console.log("Forgot Password!")}
+                                                    name="password"
+                                                    type="password"
+                                                    placeholder="Enter Password"
+                                                    label="Password"
+                                                    labelClassName="text-blue-110"
+                                                    inputClassName=""
+                                                />
+                                            </div>
+                                            <div className="my-4">
+                                                <Button
+                                                    handleClick={console.log("login")}
+                                                    text="Login"
+                                                    buttonClassName="w-full bg-turqoise-110 h-12"
+                                                    textClassName="flex justify-center space-x-2 font-bold text-white"
+                                                />
+                                            </div>
+                                            <div className="flex flex-col text-center my-4">
+                                                <div>Don't have account?</div>
+                                                <div className="text-turqoise-110 font-semibold cursor-pointer">Subscribe to Premium Content</div>
+                                            </div>
+                                        </div>
+                                    </>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
-
-                {/* <!-- Mobile menu, show/hide based on menu state. -->
-                <div className="sm:hidden" id="mobile-menu">
-                    <div className="px-2 pt-2 pb-3 space-y-1">
-                        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <a href="#" className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>
-
-                        <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
-
-                        <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-
-                        <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
-                    </div>
-                </div> */}
             </nav>
         </>
     )
