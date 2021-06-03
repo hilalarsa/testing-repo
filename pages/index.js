@@ -130,7 +130,7 @@ export default function Home() {
                 <div className="w-full md:w-1/4">
                   <Button
                     buttonClassName={"w-full border border-turqoise-110"}
-                    textClassName="flex flex-grow justify-center text-turqoise-110"
+                    textClassName="flex flex-grow justify-center text-turqoise-110 font-semibold"
                     text={"My Watchlist"}
                     withIcon
                     iconLeft={<AiOutlineUnorderedList />}>
@@ -139,8 +139,8 @@ export default function Home() {
                 <div className="mx-2"></div>
                 <div className="w-full md:w-1/4">
                   <Button
-                    buttonClassName={"w-full border border-gray-500"}
-                    textClassName="flex flex-grow justify-center"
+                    buttonClassName={"w-full border border-purple-90"}
+                    textClassName="flex flex-grow justify-center font-semibold text-purple-90"
                     text={"Stocks Screener"}
                     withIcon
                     iconLeft={<FiFilter />}
@@ -166,20 +166,26 @@ export default function Home() {
         </div>
 
       </div>
+      
+      <div className="my-6">
+        <Accordion headerText="Trending" viewMore>
+          <TrendingStockList
+            stockList={seriesOptions}
+          // setStockList={setStockList}
+          />
+        </Accordion>
 
-      <Accordion headerText="Trending">
-        <TrendingStockList
-          stockList={seriesOptions}
-        // setStockList={setStockList}
-        />
-      </Accordion>
+        <Accordion headerText="Ranking" viewMore>
+          <RankingStockList
+            stockList={seriesOptions}
+          // setStockList={setStockList}
+          />
+        </Accordion>
 
-      <Accordion headerText="Ranking">
-        <RankingStockList
-          stockList={seriesOptions}
-        // setStockList={setStockList}
-        />
-      </Accordion>
+        <Accordion headerText="Market News"></Accordion>
+        <Accordion headerText="Investing 101"></Accordion>
+        <Accordion headerText="Forum"></Accordion>
+      </div>
 
       {/* <div className="my-2">
           <ChartMain data={dataLine} />

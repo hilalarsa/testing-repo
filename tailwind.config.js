@@ -3,6 +3,11 @@ module.exports = {
   important: true,
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily:{
+      'sans': ['Montserrat'],
+      'serif': ['Montserrat'],
+      'mono': ['Montserrat'],
+    },
     extend: {
       colors: {
         turqoise: "#51B7AE",
@@ -14,6 +19,7 @@ module.exports = {
         "black-100": "#201D1E",
         "black-600": "#666666",
         "black-40": "#999999",
+        "purple-90": "#8E83CE"
       },
       outline: {
         gray: "1px solid #B3B3B3",

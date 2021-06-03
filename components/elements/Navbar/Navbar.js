@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { GoThreeBars } from "react-icons/go"
 
 import Button from "../Button/Button"
-import EmailInput from "../Input/EmailInput"
-import PasswordInput from "../Input/PasswordInput"
 
 const navbarBeforeLoginContent = [{
     title: "Market",
@@ -84,7 +83,7 @@ const navbarBeforeLoginContent = [{
 
 export default function Navbar() {
     const [popupStatus, setPopupStatus] = useState(false)
-    const [navbarState, setNavbarState] = useState("initial")
+    const router = useRouter()
 
     const handleDropdownClick = () => {
         setPopupStatus(!popupStatus)
@@ -97,7 +96,7 @@ export default function Navbar() {
                 <div className="max-w-full mx-auto px-2 sm:px-6 lg:px-8">
                     <div className="relative flex items-center justify-between h-16">
                         <div className="flex-1 flex items-center justify-between ml-2 lg:justify-start">
-                            <div className="flex-shrink-0 flex">
+                            <div className="flex flex-shrink-0 cursor-pointer" onClick={() => router.push("/")}>
                                 <img className="flex lg:hidden h-6 w-auto" src="/edge-invest-logo.png" alt="" />
                                 <img className="hidden lg:flex h-8 w-auto" src="/edge-invest-logo.png" alt="" />
                             </div>
@@ -123,86 +122,38 @@ export default function Navbar() {
                         </div>
                         <div className="absolute top-12 w-full z-50 md:w-60 md:left-0">
                             <div className={`${popupStatus ? "visible" : "hidden"} origin-top-right mt-5 rounded-md shadow-lg p-2 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none`} role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabIndex="-1">
-                                {navbarState == "initial" &&
-                                    <>
-                                        {
-                                            navbarBeforeLoginContent.map((item) => {
-                                                return (
-                                                    <>
-                                                        <div>
-                                                            <div className="text-sm text-gray-700">{item.title}</div>
+                                {navbarBeforeLoginContent.map((item) => {
+                                    return (
+                                        <>
+                                            <div>
+                                                <div className="text-sm text-gray-700">{item.title}</div>
+                                            </div>
+                                            <div className="flex flex-wrap justify-start">
+                                                {item.content.map((itemContent, index) => {
+                                                    return (
+                                                        <div key={index} className="flex p-3 w-1/2">
+                                                            <a href={itemContent.url} className="flex justify-center h-6">
+                                                                <img src={itemContent.icon} />
+                                                                <div>{itemContent.title}</div>
+                                                            </a>
                                                         </div>
-                                                        <div className="flex flex-wrap justify-start">
-                                                            {item.content.map((itemContent, index) => {
-                                                                return (
-                                                                    <div key={index} className="flex p-3 w-1/2">
-                                                                        <a href={itemContent.url} className="flex justify-center h-6">
-                                                                            <img src={itemContent.icon} />
-                                                                            <div>{itemContent.title}</div>
-                                                                        </a>
-                                                                    </div>
-                                                                )
-                                                            })}
-                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
 
-                                                    </>
-                                                )
-                                            })
-                                        }
-
-                                        <div className="flex justify-center bg-turqoise-100 py-2 rounded-lg my-2">
-                                            <Button
-                                                handleClick={() => { setNavbarState("login") }}
-                                                text="Login"
-                                                withIcon
-                                                iconRight={<AiOutlineArrowRight color="white" />}
-                                                buttonClassName="w-1/3 bg-turqoise-110"
-                                                textClassName="flex justify-center space-x-2 font-bold text-white"
-                                            />
-                                        </div>
-                                    </>
-                                }
-
-                                {navbarState == "login" &&
-                                    <>
-                                        <div className="mx-4 my-8">
-                                            <div className="text-2xl text-blue-100 font-semibold my-4">Login to Your Account</div>
-                                            <div className="flex flex-col">
-                                                <EmailInput
-                                                    name="email"
-                                                    type="email"
-                                                    placeholder="example@email.com"
-                                                    label="Email"
-                                                    labelClassName="w-full text-blue-110"
-                                                    inputClassName="w-full"
-                                                />
-                                            </div>
-                                            <div className="flex flex-col">
-                                                <PasswordInput
-                                                    handleForgotPassword={console.log("Forgot Password!")}
-                                                    name="password"
-                                                    type="password"
-                                                    placeholder="Enter Password"
-                                                    label="Password"
-                                                    labelClassName="text-blue-110"
-                                                    inputClassName=""
-                                                />
-                                            </div>
-                                            <div className="my-4">
-                                                <Button
-                                                    handleClick={console.log("login")}
-                                                    text="Login"
-                                                    buttonClassName="w-full bg-turqoise-110 h-12"
-                                                    textClassName="flex justify-center space-x-2 font-bold text-white"
-                                                />
-                                            </div>
-                                            <div className="flex flex-col text-center my-4">
-                                                <div>Don't have account?</div>
-                                                <div className="text-turqoise-110 font-semibold cursor-pointer">Subscribe to Premium Content</div>
-                                            </div>
-                                        </div>
-                                    </>
-                                }
+                                        </>
+                                    )
+                                })}
+                                <div className="flex justify-center bg-turqoise-100 py-2 rounded-lg my-2">
+                                    <Button
+                                        handleClick={() => { router.push("/login") }}
+                                        text="Login"
+                                        withIcon
+                                        iconRight={<AiOutlineArrowRight color="white" />}
+                                        buttonClassName="w-1/3 bg-turqoise-110"
+                                        textClassName="flex justify-center space-x-2 font-bold text-white"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
